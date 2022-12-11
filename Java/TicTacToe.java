@@ -9,15 +9,20 @@ public class TicTacToe {
 
     public void Start(){
         Scanner choice = new Scanner(System.in);
-        System.out.println("1 - Start New Game \n2 - Read rules");
+        System.out.println("1 - Start New Game \n2 - Read rules\n3 - Quite Game");
         switch (choice.nextLine()){
 
             case "1":
-            System.out.println("This will start a game eventually");
+            Game newGame = new Game();
+
+            
             break;
 
             case "2":
             System.out.println("This is going to be rules eventually");
+            break;
+
+            case "3":
             break;
 
             default:
