@@ -99,18 +99,28 @@ public class Game {
     }
 
     public void TakeAction(int number, int letter){
-        char emblem;
+        String emblem;
         if(turn%2==1){
-            emblem = 'X';
+            emblem = "X";
         } else if(turn%2==0){
-            emblem = 'O';
-        // VS Code was not happy that the emblem variable might won't be declared, even though this should nerever result to placing the symbol '@'    
+            emblem = "O";
+        // VS Code was not happy that the emblem variable might won't be declared, even though this should nerever result to placing the symbol "@"
         } else {
-            emblem = '@';
+            emblem = "@";
         }
-        table[letter][number]= ""+emblem;
+        if (table[letter][number].equals("X") || table[letter][number].equals("O")){
+            System.out.println("This spot is already taken, please choose an empty spot!");
+            try {
+                Thread.sleep(3000);
+              } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+              }
+            this.Action();
+        } else {
+        table[letter][number]= emblem;
+        turn++;
         this.Action();
-
+        }
     }
 
     public static void main(String[] args) {
@@ -119,7 +129,7 @@ public class Game {
         // int b = a - '1';
         // System.out.println(b);
         Game myGame = new Game("Test name 1","Test name 2");
-        myGame.Action();
+        myGame.StartGame();
         // System.out.println("  A B C");
         // for (int i = 0; i < table.length ; i++){
         //     System.out.print(i+1+"|");
