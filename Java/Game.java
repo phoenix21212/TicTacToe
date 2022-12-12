@@ -1,6 +1,6 @@
 // import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Arrays;
+
 
 public class Game {
 
@@ -71,9 +71,23 @@ public class Game {
     }
 
     // Starts game
-    public void StartGame(){
+    public int StartGame(){
         turn = 1;
         this.Action();
+
+        if (turn==9){
+            System.out.println("The game is a draw");
+            return 0;
+        } else if(turn%2==1){
+            System.out.println("The winner is: "+playerOne);
+            return 1;
+        } else if(turn%2==0){
+            System.out.println("The winner is: "+playerTwo);
+            return 2;
+        } else {
+            return 3;
+        }
+
     }
 
 
@@ -128,6 +142,10 @@ public class Game {
         if (this.Win(emblem, letter, number)==true){
             this.View();
             System.out.println("congrats, you won");
+        } else if (turn==table.length*table[0].length){ 
+            this.View();
+            System.out.println("It's a draw");
+
         } else {
         turn++;
         this.Action();
@@ -189,48 +207,40 @@ public class Game {
         }
 
         //to count upL neighbors
-        for (int i = 1; i <= number ; i++){
-            for (int j = 1; i <= letter ; j++){
-                if(table[letter-j][number-i].equals(emblem)){
+        for (int i = 1; i <= number && i <= letter ; i++){
+                if(table[letter-i][number-i].equals(emblem)){
                     upL++;
                 } else {
                     break;
                 }
-            }
         }
         //to count downR neighbors
-        for (int i = 1; i <= number*-1+2 ; i++){
-            for (int j = 1; j <= letter*-1+2 ; j++){
-                if(table[letter+j][number+i].equals(emblem)){
+        for (int i = 1; i <= number*-1+2 && i <= letter*-1+2; i++){
+                if(table[letter+i][number+i].equals(emblem)){
                     downR++;
                 } else {
                     break;
                 }
-            }
         }
         if (upL + downR == 2){
             return true;
         }
 
         //to count upR neighbors
-        for (int i = 1; i <= number ; i++){
-            for (int j = 1; j <= letter*-1+2 ; j++){
-                if(table[letter+j][number-i].equals(emblem)){
+        for (int i = 1; i <= number && i <= letter*-1+2; i++){
+                if(table[letter+i][number-i].equals(emblem)){
                     upR++;
                 } else {
                     break;
                 }
-            }
         }
         //to count downL neighbors
-        for (int i = 1; i <= number*-1+2 ; i++){
-            for (int j = 1; j <= letter ; j++){
-                if(table[letter-j][number+i].equals(emblem)){
+        for (int i = 1; i <= number*-1+2 && i <= letter; i++){
+                if(table[letter-i][number+i].equals(emblem)){
                     downL++;
                 } else {
                     break;
                 }
-            }
         }
         if (upR + downL == 2){
             return true;
