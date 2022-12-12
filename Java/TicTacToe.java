@@ -7,13 +7,13 @@ public class TicTacToe {
 
     }
 
-    public void Start(){
+    public void Start(String playerOne, String playerTwo){
         Scanner choice = new Scanner(System.in);
         System.out.println("1 - Start New Game \n2 - Read rules\n3 - Quite Game");
         switch (choice.nextLine()){
 
             case "1":
-            Game newGame = new Game();
+            Game newGame = new Game(playerOne, playerTwo);
 
             
             break;
@@ -27,7 +27,7 @@ public class TicTacToe {
 
             default:
             System.out.println("Incorrect statement was entered, please choose a correct statement from the list above.");
-            Start();
+            Start(playerOne, playerTwo);
         }
     }
 
@@ -44,7 +44,7 @@ public class TicTacToe {
 
         System.out.println("Welcome "+playerOne.name+" and "+playerTwo.name+ " the game shell begin. \nPlease select one of the following by typing it in.");
 
-        currentGame.Start();
+        currentGame.Start(playerOne.name, playerTwo.name);
         // System.out.println("1 - Start New Game \n 2 - Read rules");
         // System.out.println(choice.nextLine());
         // if (choice.nextLine().equals("1")){

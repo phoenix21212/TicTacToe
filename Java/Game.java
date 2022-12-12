@@ -10,7 +10,17 @@ public class Game {
     {" "," "," "}
     };
 
+    String playerOne;
+    String playerTwo;  
+    int turn;
+    
+    public Game(String playerOne, String playerTwo){
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
 
+
+    }
+// Prints the board with the current position.
     public void View(){
         System.out.println(System.lineSeparator().repeat(50));
         System.out.println("  A B C");
@@ -24,10 +34,10 @@ public class Game {
             System.out.println("\n "+"-".repeat(7));
         }
     }
-
+// Validates the user input
     public boolean Valid(char temp1, char temp2){
 
-        char[] temp1Check = {'A', 'B', 'C', 'a', 'b', 'c'};
+        char[] temp1Check = {'A', 'B', 'C'};
         char[] temp2Check = {'1', '2', '3'};
         boolean temp1Result = false;
         boolean temp2Result = false;
@@ -35,7 +45,7 @@ public class Game {
         for (int i = 0 ; i < temp1Check.length; i++){
 
             boolean thisIsValid = false;
-            thisIsValid = temp1Check[i]==temp1;
+            thisIsValid = temp1Check[i]==Character.toUpperCase(temp1);
             if (thisIsValid==true){
                 temp1Result = true;
             }
@@ -55,6 +65,11 @@ public class Game {
         }
         
     }
+// Starts game
+    public void StartGame(){
+        turn = 1;
+        this.Action();
+    }
 
     public void Action(){
         this.View();
@@ -64,11 +79,16 @@ public class Game {
         char temp1 = scannerValue.charAt(0);
         char temp2 = scannerValue.charAt(1);
         if(true==this.Valid(temp1, temp2)){
-            System.out.println("Good job");
+            int iTemp1= Character.toUpperCase(temp1) - 'A';
+            int iTemp2= temp2 - '1';
+            this.TakeAction(iTemp1, iTemp2);
+            // System.out.println("Good job");
+
+
         } else {
             System.out.println("\nPlease enter a valid move\n\nIn 3 seconds");
             try {
-                Thread.sleep(3000);                
+                Thread.sleep(3000);
               } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
               }
@@ -78,9 +98,27 @@ public class Game {
     
     }
 
+    public void TakeAction(int number, int letter){
+        char emblem;
+        if(turn%2==1){
+            emblem = 'X';
+        } else if(turn%2==0){
+            emblem = 'O';
+        // VS Code was not happy that the emblem variable might won't be declared, even though this should nerever result to placing the symbol '@'    
+        } else {
+            emblem = '@';
+        }
+        table[letter][number]= ""+emblem;
+        this.Action();
+
+    }
+
     public static void main(String[] args) {
 
-        Game myGame = new Game();
+        // char a = '1';
+        // int b = a - '1';
+        // System.out.println(b);
+        Game myGame = new Game("Test name 1","Test name 2");
         myGame.Action();
         // System.out.println("  A B C");
         // for (int i = 0; i < table.length ; i++){
