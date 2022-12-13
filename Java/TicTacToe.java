@@ -9,7 +9,7 @@ public class TicTacToe {
 
     public void Start(String playerOne, String playerTwo){
         Scanner choice = new Scanner(System.in);
-        System.out.println("1 - Start New Game \n2 - Read rules\n3 - Quite Game");
+        System.out.println("----------------------------\n1 - Start New Game \n2 - Read rules\n3 - Quite Game");
         Player p1 = new Player(playerOne);
         Player p2 = new Player(playerTwo);
         switch (choice.nextLine()){
@@ -32,7 +32,12 @@ public class TicTacToe {
                 System.out.println("Something went wrong");
                 break;
             }
-            System.out.println("\n\n\nThe current score is:\n"+ p1.name+": "+p1.score+"  VS  "+p2.name + ": "+p2.score);
+            if (p1.score >= p2.score){
+            System.out.println("\n\nThe current score is:\n\n1. - "+ p1.name+": "+p1.score+"\n2. - "+ p2.name+": "+p2.score+"\n\n");
+                }
+            if (p2.score >= p1.score){
+                System.out.println("\n\nThe current score is:\n\n1. - "+ p2.name+": "+p2.score+"\n2. - "+ p1.name+": "+p1.score+"\n\n");
+                }
             Start(playerOne, playerTwo);
             break;
 
@@ -61,7 +66,7 @@ public class TicTacToe {
         Player playerOne = new Player(input.nextLine());     //Create new user based on input
         System.out.print("Player Two, please enter your name: ");
         Player playerTwo = new Player(input.nextLine());     //Create new user based on input
-        System.out.println("Welcome "+playerOne.name+" and "+playerTwo.name+ " the game shell begin. \nPlease select one of the following by typing it in.");
+        System.out.println("Welcome "+playerOne.name+" and "+playerTwo.name+ " the game shell begin. \nPlease select one of the following by typing it in and pressing enter.");
 
         currentGame.Start(playerOne.name, playerTwo.name);
     }

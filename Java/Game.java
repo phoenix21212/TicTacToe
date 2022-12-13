@@ -5,15 +5,13 @@ import java.util.Scanner;
 public class Game {
 
     
-    static String[][] table = new String[][]{{" "," "," "},
-    {" "," "," "},
-    {" "," "," "}
-    };
+    static String[][] table; 
 
     String playerOne;
     String playerTwo;  
     int turn;
     
+    // Constructor
     public Game(String playerOne, String playerTwo){
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
@@ -21,6 +19,30 @@ public class Game {
 
     }
 
+    // Starts game
+    public int StartGame(){
+        turn = 1;
+        table = new String[][]{{" "," "," "},
+                               {" "," "," "},
+                               {" "," "," "}
+                              };
+        this.Action();
+
+        if (turn==9){
+            System.out.println("\nThe game is a draw");
+            return 0;
+        } else if(turn%2==1){
+            System.out.println("The winner is: "+playerOne);
+            return 1;
+        } else if(turn%2==0){
+            System.out.println("The winner is: "+playerTwo);
+            return 2;
+        } else {
+            return 3;
+        }
+
+    }
+    
     // Prints the board with the current position.
     public void View(){
         System.out.println(System.lineSeparator().repeat(50));
@@ -70,25 +92,6 @@ public class Game {
         
     }
 
-    // Starts game
-    public int StartGame(){
-        turn = 1;
-        this.Action();
-
-        if (turn==9){
-            System.out.println("The game is a draw");
-            return 0;
-        } else if(turn%2==1){
-            System.out.println("The winner is: "+playerOne);
-            return 1;
-        } else if(turn%2==0){
-            System.out.println("The winner is: "+playerTwo);
-            return 2;
-        } else {
-            return 3;
-        }
-
-    }
 
 
     public void Action(){
@@ -141,7 +144,7 @@ public class Game {
         table[letter][number]= emblem;
         if (this.Win(emblem, letter, number)==true){
             this.View();
-            System.out.println("congrats, you won");
+            System.out.println("\n");
         } else if (turn==table.length*table[0].length){ 
             this.View();
             System.out.println("It's a draw");
