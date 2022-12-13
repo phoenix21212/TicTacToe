@@ -9,7 +9,7 @@ public class TicTacToe {
 
     public void Start(String playerOne, String playerTwo){
         Scanner choice = new Scanner(System.in);
-        System.out.println("----------------------------\n1 - Start New Game \n2 - Read rules\n3 - Quite Game");
+        System.out.println("----------------------------\n1 - Start New Game \n2 - Read rules\n3 - Quit Game");
         Player p1 = new Player(playerOne);
         Player p2 = new Player(playerTwo);
         switch (choice.nextLine()){
@@ -18,6 +18,7 @@ public class TicTacToe {
             Game newGame = new Game(playerOne, playerTwo);
             switch(newGame.StartGame()){
                 case 0:
+                System.out.println("Game is draw - TTT - Start function");
                 break;
 
                 case 1:
