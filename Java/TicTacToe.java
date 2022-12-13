@@ -49,6 +49,7 @@ public class TicTacToe {
 
 
             case "3":
+            System.out.println("You've quit the game!");
             break;
 
 
